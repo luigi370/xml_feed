@@ -1,5 +1,13 @@
-.office-card {
-  background-color: #e6e7e8;
+.offices-container {
+  background-color: #b4b4b4;
+}
+
+.offices-container__card {
+  background-color: #9b9c9c;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: white;
 }
 
 .advert-picture {
@@ -10,8 +18,20 @@
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.sub-title {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #0b2e13;
+  color: white;
+  padding: 3px 7px 3px 7px;
+}
+
+.price {
+  color: red;
 }
 
 /*# sourceMappingURL=custom.css.map */

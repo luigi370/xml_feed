@@ -10,14 +10,12 @@
     <link rel="stylesheet" href="static/bootstrap/css/bootstrap.css">
 </head>
 
-<body>
+<body class="bg-dark">
 
 <header>
     <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <strong>Dealers League LTD</strong>
-            </a>
+        <div class="container-fluid text-white">
+                Dealers League LTD
         </div>
     </div>
 </header>
@@ -33,6 +31,7 @@
     </section>
 
     <?php
+    //$url = "http://idealboat.com/feed.xml";
     $url = "feed.xml";
     $xml = simplexml_load_file($url);
     ?>
@@ -40,7 +39,7 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-lg-12 bg-dark text-white text-center">
+            <div class="col-lg-12 bg-dark text-white text-center mb-3 h5">
                 <?=
                 $xml->broker->broker_details->company_name;
                 ?>
@@ -48,9 +47,10 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12 office-card mb-5 p-3">
+            <div class="col-lg-12 p-3">
                 <?php
                 foreach ($xml->broker->offices as $office) {
+                    echo "<div class='offices-container__card'>";
                     foreach ($office as $attributes) {
                         foreach ($attributes as $key => $value) {
                             echo ucfirst(str_replace('_', ' ', $key)) . ': ' . $value . '<br>';
@@ -62,6 +62,7 @@
                             }
                         }
                     }
+                    echo "</div>";
                 }
                 ?>
             </div>
@@ -81,31 +82,43 @@
                                     }
                                 }
                                 break;
-                            /*case 'advert_features':
+                            case 'advert_features':
                                 echo '<div class="mt-3">';
+                                echo "<div class='sub-title'>Advert features</div>";
                                 foreach ($value as $k => $v) {
-                                    echo ucfirst(str_replace('_', ' ', $k)) . ': ' . $v . '<br>';
+                                    if ($v != '') {
+                                        if ($k == 'asking_price') {
+                                            echo '<b>' . ucfirst(str_replace('_', ' ', $k)) . ': </b><span class="price">' . strip_tags($v, '<br>'). ' ' . $v['currency'] . '</span><br>';
+                                        } else {
+                                            echo '<b>' . ucfirst(str_replace('_', ' ', $k)) . ': </b>' . strip_tags($v, '<br>') . '<br>';
+                                        }
+                                    }
                                     if (is_object($v)) {
                                         foreach ($v as $xkey => $xvalue) {
                                             if ($xvalue) {
-                                                echo ucfirst(str_replace('_', ' ', $xkey)) . ': ' . $xvalue . '<br>';
+                                                echo '<b>' . ucfirst(str_replace('_', ' ', $xkey)) . ': </b>' . strip_tags($xvalue, '<br>') . '<br>';
                                             }
 
                                         }
                                     }
                                 }
                                 echo '</div>';
-                                break;*/
+                                break;
                             case 'boat_features':
                                 echo '<div class="mt-3">';
+                                echo "<div class='sub-title'>Boat features</div>";
                                 foreach ($value as $k => $v) {
                                     if ($v != '') {
-                                        echo '<b>' . ucfirst(str_replace('_', ' ', $v['name'])) . ': </b>' . $v . '<br>';
+                                        echo '<b>' . ucfirst(str_replace('_', ' ', $v['name'])) . ': </b>' . strip_tags($v, '<br>') . '<br>';
                                     }
                                     if (is_object($v)) {
+                                        if ($k == 'dimensions') {
+                                            echo '<b>' . ucfirst(str_replace('_', ' ', $k)) . ': </b><br>';
+                                        }
                                         foreach ($v as $xkey => $xvalue) {
+
                                             if ($xvalue != '') {
-                                                echo '<b>' . ucfirst(str_replace('_', ' ', $xvalue['name'])) . ': </b>' . $xvalue . '<br>';
+                                                echo '<b>' . ucfirst(str_replace('_', ' ', $xvalue['name'])) . ': </b>' . strip_tags($xvalue, '<br>') . '<br>';
                                             }
                                         }
                                     }
@@ -130,14 +143,6 @@
 
     </div>
 </footer>
-<script src="static/bootstrap/js/bootstrap.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-<script src="/docs/4.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd"
-        crossorigin="anonymous"></script>
 </body>
 </html>
 
