@@ -1,0 +1,17 @@
+.office-card {
+  background-color: #e6e7e8;
+}
+
+.advert-picture {
+  width: 100%;
+  height: auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+/*# sourceMappingURL=custom.css.map */
